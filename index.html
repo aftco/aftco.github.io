@@ -20,6 +20,7 @@ title: Two Hand News
             -->
 
             <!-- linked-list linking: -->
+            <!-- {{post.link}} -->
             {% if post.link %}
             <div class="col-md-9"><h4><a href="{{ post.link }}">{{ post.title }}</a></h4></div>
             {% else %}
@@ -28,7 +29,7 @@ title: Two Hand News
 
             <div class="col-md-3"><p class="meta">{{ post.date | date_to_string }}</p></div>
             <div>
-              
+ 
               <div class="post">
               {{ post.content }}
               </div>
