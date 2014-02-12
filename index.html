@@ -14,14 +14,30 @@ title: Two Hand News
       <div class="row">
         <div class="col-md-12">
           <div class="well post-well">
+
+            <!-- pre linked-list:
             <div class="col-md-9"><h4><a href="{{ post.url }}">{{ post.title }}</a></h4></div>
-			<div class="col-md-3"><p class="meta">{{ post.date | date_to_string }}</p></div>
+            -->
+
+            <!-- linked-list linking: -->
+            {% if post.link %}
+            <div class="col-md-9"><h4><a href="{{ post.link }}">{{ post.title }}</a></h4></div>
+            {% else %}
+            <div class="col-md-9"><h4>{{ post.title }}</h4></div>
+            {% endif %}
+
+            <div class="col-md-3"><p class="meta">{{ post.date | date_to_string }}</p></div>
             <div>
               
               <div class="post">
               {{ post.content }}
               </div>
+
             </div>
+
+            <!-- per-post permalink: -->
+            <div class="col-md-99"><a href="{{ post.url }}" title="Permalink">→2HN</a></div>
+
           </div>
         </div>
       </div>
