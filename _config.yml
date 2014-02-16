@@ -2,3 +2,5 @@ name: Two Hand News
 markdown: redcarpet
 pygments: true
 exclude: ["vendor"]
+paginate: 10
+paginate_path: "/page:num"
