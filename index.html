@@ -10,7 +10,7 @@ title: Two Hand News
 </div>
 <div class="row">
   <div class="col-md-12">
-    {% for post in site.posts %}
+    {% for post in paginator.posts %}
       <div class="row">
         <div class="col-md-12">
           <div class="well post-well">
@@ -43,5 +43,37 @@ title: Two Hand News
         </div>
       </div>
     {% endfor %}
+    <div class="row">
+      <div class="col-md-12">
+        <div id="footer" class="well post-well">
+
+          {% if paginator.total_pages > 1 %}
+            <div class="pagination">
+              {% if paginator.previous_page %}
+                <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
+              {% else %}
+                <span>&laquo; Prev</span>
+              {% endif %}
+
+              {% for page in (1..paginator.total_pages) %}
+                {% if page == paginator.page %}
+                  <em>{{ page }}</em>
+                {% elsif page == 1 %}
+                  <a href="{{ '/index.html' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
+                {% else %}
+                  <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+                {% endif %}
+              {% endfor %}
+
+              {% if paginator.next_page %}
+                <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
+              {% else %}
+                <span>Next &raquo;</span>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
   </div>
 </div>
