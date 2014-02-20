@@ -17,4 +17,4 @@ And:
 >
 > They responded by losing both games by double-digit margins.
 
-Certainly not heading the right direction, even with the coaching change..
+Certainly not heading the right direction..
