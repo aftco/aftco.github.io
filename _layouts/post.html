@@ -13,14 +13,15 @@ layout: default
 
             <!-- linked-list linking: -->
             <!-- page.link: {{page.link}} -->
+            <div class="row" style="padding-left: 15px;">
             {% if page.link %}
             <div class="col-md-9"><h4><a href="{{ page.link }}">{{ page.title }}</a></h4></div>
             {% else %}
             <div class="col-md-9"><h4>{{ page.title }}</h4></div>
             {% endif %}
 
-              <div class="col-md-3"><p class="meta">{{ page.date | date_to_string }}</p></div>
-            <div>
+            <div class="col-md-3"><p class="meta">{{ page.date | date_to_string }}</p></div>
+            </div>
             <div class="post">
               {{ content }}
             </div>
