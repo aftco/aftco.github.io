@@ -1,4 +1,6 @@
 name: Two Hand News
+description: Michigan sports links
+url: http://2handnews.com
 markdown: redcarpet
 pygments: true
 exclude: ["vendor"]
