@@ -27,8 +27,11 @@ def get_title_filename(title):
     return t.strip('-')
 
 
-def get_post_datetime():
-    return datetime.datetime.now().strftime(POST_FILENAME_DATE_FORMAT)
+def get_post_datetime(offset):
+#    return datetime.datetime.now().strftime(POST_FILENAME_DATE_FORMAT)
+    td_offset = datetime.timedelta(seconds=(offset * 60 * 60))
+    dt = datetime.datetime.now() + td_offset
+    return dt.strftime(POST_FILENAME_DATE_FORMAT)
 
 
 def get_post_filename(data):
@@ -55,7 +58,7 @@ def main(args):
         "title": args.title,
         "link": args.link,
         "post_filename": get_title_filename(args.title),
-        "post_datetime": get_post_datetime(),
+        "post_datetime": get_post_datetime(args.offset),
     }
     data["post_filename"] = get_post_filename(data)
     data["post_body"] = get_post_body(data)
@@ -70,6 +73,8 @@ def parse_arguments():
         help="title of the Jekyll post")
     parser.add_argument("--link", dest="link", default='',
         help="url link for the Jekyll linked-list post [default: '']")
+    parser.add_argument("--offset", dest="offset", default=0, type=int,
+        help="hours to offset the timestamp [default: 0]")
     return parser.parse_args()
 
 
