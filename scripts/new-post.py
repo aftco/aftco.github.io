@@ -3,10 +3,13 @@
 import argparse
 import datetime
 import os
+from os import path
 import re
 
+PROJECT_ROOT = path.normpath(path.join(path.dirname(path.realpath(__file__)), '..'))
 
-POST_DEFAULT_DIRECTORY = "_posts"
+
+POST_DEFAULT_DIRECTORY = path.join(PROJECT_ROOT, "_posts")
 POST_FILENAME_DATE_FORMAT = "%Y-%m-%d-%H-%M"
 POST_FILENAME_FORMAT = "{post_datetime}-{post_filename}.md"
 REGEX_FIND_PATTERN = """[ -"',:.?]+"""
