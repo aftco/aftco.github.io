@@ -1,5 +1,23 @@
-_site
+*.swp
+
+
+# python ignores
+.installed.cfg
+bin
+obj
+develop-eggs
+eggs
+parts
+*.egg-info
+*.pyc
+.idea
+
+
+# bundle ignores
 .bundle
 vendor/bundle
-*.swp
-.idea
+
+
+# jekyll ignores
+_site
+
