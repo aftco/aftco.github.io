@@ -87,7 +87,7 @@ class Post(object):
         allowed_chars = 140 # number of character twitter allows
         used_chars = 22 # 22 is the number of chars taken by a link
 
-        title = self.title
+        title = self.title.strip()
         if len(title) > (allowed_chars - used_chars):
             left = allowed_chars - used_chars - 3
             title = title[:left] + "..."
