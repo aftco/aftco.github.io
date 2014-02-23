@@ -6,14 +6,22 @@ import twitter
 
 
 PROJECT_ROOT = path.normpath(path.join(path.dirname(path.realpath(__file__)), '..'))
+
+API_CONSUMER_KEY='TGkY2yQ249sPGtamuNjLUg'
+ACCESS_TOKEN_KEY='2326396458-eO0zImMateqrGnkGhF46mglyL77preju5HaOQVC'
+
 DEFAULT_GIT_REPO = path.join(PROJECT_ROOT)
 DEFAULT_WORKING_BRANCH = "auto/post_tweeter"
 DEFAULT_REMOTE_TO_CHECK = "origin"
 DEFAULT_BRANCH_TO_CHECK = "master"
 
 FILE_PARSE_REGEX = re.compile("^.*/(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})-(?P<file>.+)\.\w{2,4}$",re.IGNORECASE)
-TITLE_REGEX = re.compile("^title\:\s\"?(?P<title>.+?)\"?$", re.IGNORECASE)
 URL_FORMAT="http://2handnews.com/{}/{}/{}/{}.html"
+TITLE_REGEX = re.compile("^title\:\s\"?(?P<title>.+?)\"?$", re.IGNORECASE)
+TAGS_REGEX = re.compile("^tags\:\s\"?(?P<tags>.+?)\"?$", re.IGNORECASE)
+LINK_REGEX = re.compile("^link\:\s\"?(?P<link>.+?)\"?$", re.IGNORECASE)
+
+PREFERRED_TAGS = ['lions', 'tigers', 'pistons', 'redwings', 'uofm', 'msu', 'cmu', 'mtu']
 
 
 def get_post_list(repo_path):
@@ -62,44 +70,112 @@ def revert_git(git_repo_path, branch):
     repo.heads[branch].checkout()
 
 
-def get_url_title_tuples(posts):
-    results = []
-    for post in posts:
+class Post(object):
+    def __init__(self):
+        self.url = None
+        self.title = None
+        self.tags = None
+        self.link = None
+
+    def get_tag_text(self, tag, allowed_chars, used_chars):
+        if len(tag) + 2 > (allowed_chars - used_chars):
+            return None
+
+        return " #" + tag
+
+    def format_for_twitter(self):
+        allowed_chars = 140 # number of character twitter allows
+        used_chars = 22 # 22 is the number of chars taken by a link
+
+        title = self.title
+        if len(title) > (allowed_chars - used_chars):
+            left = allowed_chars - used_chars - 3
+            title = title[:left] + "..."
+
+        used_chars += len(title)
+
+        tweet = title + " " + self.url
+        if self.tags is None or len(self.tags) == 0 or (allowed_chars - used_chars) < 5:
+            return tweet
+
+        used_tags = []
+        # preferred tag sweep
+        for t in self.tags:
+            if t.lower() in PREFERRED_TAGS and t not in used_tags:
+                tag_text = self.get_tag_text(t, allowed_chars, used_chars)
+                if tag_text is not None:
+                    used_tags.append(t)
+                    tweet += tag_text
+                    used_chars += len(tag_text)
+
+        # second sweep for any non-preferred tags that will fit
+        for t in self.tags:
+            if t not in used_tags:
+                tag_text = self.get_tag_text(t, allowed_chars, used_chars)
+                if tag_text is not None:
+                    used_tags.append(t)
+                    tweet += tag_text
+                    used_chars += len(tag_text)
+
+        # final sanity check
+        if len(tweet) > allowed_chars:
+            return tweet[:allowed_chars]
+
+        return tweet
+
+    @staticmethod
+    def read(post_file):
         try:
-            fmatch = FILE_PARSE_REGEX.match(post)
+            fmatch = FILE_PARSE_REGEX.match(post_file)
             if fmatch is None:
-                print("Unexpected file name for post '{}'. Skipping.".format(post))
-                continue
+                print("Unexpected file name for post '{}'. Skipping.".format(post_file))
+                return None
 
             pf = fmatch.groupdict()
 
-            url = URL_FORMAT.format(pf['year'], pf['month'], pf['day'], pf['file'])
-            title = None
-            with open(post, 'r') as f:
+            p = Post()
+            with open(post_file, 'r') as f:
                 for l in f:
                     tmatch = TITLE_REGEX.match(l)
                     if tmatch is not None:
-                        title = tmatch.groupdict()['title']
-                        break
+                        p.title = tmatch.groupdict()['title']
 
-            if title is None:
-                print("No title line for post '{}'. Skipping.".format(post))
-                continue
+                    gmatch = TAGS_REGEX.match(l)
+                    if gmatch is not None:
+                        p.tags = gmatch.groupdict()['tags']
+                        p.tags = p.tags.split()
 
-            results.append((url, title))
+                    lmatch = LINK_REGEX.match(l)
+                    if lmatch is not None:
+                        p.link = lmatch.groupdict()['link']
+
+
+            if p.title is None:
+                print("No title line for post '{}'. Skipping.".format(post_file))
+                return None
+
+            p.url = URL_FORMAT.format(pf['year'], pf['month'], pf['day'], pf['file'])
+
+            return p
 
         except Exception as e:
-            print("Can't get URL and title for post '{}'. Error: ".format(post, e.message))
+            print("Can't get URL and title for post '{}'. Error: ".format(post_file, e.message))
+            return None
+
+
+def read_posts(post_files):
+    results = []
+    for post_file in post_files:
+        p = Post.read(post_file)
+        if p is not None:
+            results.append(p)
 
     return results
 
 
-def tweet_posts(url_title_pairs, tapi):
-    for url, title in url_title_pairs:
-        if len(title) > 117:
-            title = title[:114] + "..."
-
-        tweet = title + " " + url
+def tweet_posts(posts, tapi):
+    for post in posts:
+        tweet = post.format_for_twitter()
 
         print("Tweet: ")
         print(tweet)
@@ -123,19 +199,20 @@ def main(git_repo_path, remote, branch, working_branch, max_tweets, skip_tweetin
     if skip_tweeting:
         print("Will not actually tweet.")
     else:
-        tapi = twitter.Api(consumer_key='TGkY2yQ249sPGtamuNjLUg',
+        tapi = twitter.Api(consumer_key=API_CONSUMER_KEY,
                            consumer_secret=consumer_secret,
-                           access_token_key='2326396458-eO0zImMateqrGnkGhF46mglyL77preju5HaOQVC',
+                           access_token_key=ACCESS_TOKEN_KEY,
                            access_token_secret=token_secret)
 
-    posts = get_new_posts(git_repo_path, remote, branch, working_branch)
+    post_files = get_new_posts(git_repo_path, remote, branch, working_branch)
     try:
-        if len(posts) > max_tweets:
+        if len(post_files) > max_tweets:
             print("Too many new posts ({}), will only tweet {}.".format(len(posts), max_tweets))
-            posts = posts[-max_tweets:]
+            posts = post_files[-max_tweets:]
 
-        url_title_tuples = get_url_title_tuples(posts)
-        tweet_posts(url_title_tuples, tapi)
+
+        posts = read_posts(post_files)
+        tweet_posts(posts, tapi)
     finally:
         try:
             revert_git(git_repo_path, branch)
