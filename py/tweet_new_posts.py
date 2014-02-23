@@ -207,7 +207,7 @@ def main(git_repo_path, remote, branch, working_branch, max_tweets, skip_tweetin
     post_files = get_new_posts(git_repo_path, remote, branch, working_branch)
     try:
         if len(post_files) > max_tweets:
-            print("Too many new posts ({}), will only tweet {}.".format(len(posts), max_tweets))
+            print("Too many new posts ({}), will only tweet {}.".format(len(post_files), max_tweets))
             posts = post_files[-max_tweets:]
 
 
