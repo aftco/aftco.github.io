@@ -67,5 +67,6 @@ blockquote {
 
 .modal-tag-list {
   list-style-type: none;
+  padding-left: 0;
 }
 
