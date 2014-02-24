@@ -1,5 +1,5 @@
 var TAG_MODAL = $('\
-<div id="tag-post-list-modal" class="modal fade">\
+<div id="tag-post-list-modal" class="modal fade" tabindex="-1">\
   <div class="modal-dialog">\
     <div class="modal-content">\
       <div class="modal-header">\
@@ -58,7 +58,7 @@ TagManager.prototype = {
       var url = posts[i][0];
       var title = posts[i][1];
       var date = posts[i][2];
-      var displayDate = moment(posts[i][2]).format("DD MMM YYYY");
+      var displayDate = moment.utc(posts[i][2]).format("DD MMM YYYY");
 
       var pst = '<li itemscope><span class="entry-date"><time datetime="' + date + '" itemprop="datePublished">' +
         displayDate + '</time></span> &raquo; <a href="' + url + '">' + title + '</a></li>';
