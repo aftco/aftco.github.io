@@ -57,11 +57,10 @@ TagManager.prototype = {
     for (var i=0; i<posts.length; i++) {
       var url = posts[i][0];
       var title = posts[i][1];
-      var date = posts[i][2];
-      var displayDate = moment(new Date(posts[i][2])).format("DD MMM YYYY");
+      var displayDate = moment(posts[i][2]).format("MMMM DD, YYYY");
 
-      var pst = '<li itemscope><span class="entry-date"><time datetime="' + date + '" itemprop="datePublished">' +
-        displayDate + '</time></span> &raquo; <a href="' + url + '">' + title + '</a></li>';
+      var pst = '<li itemscope><span class="entry-date">' +
+        displayDate + '</span> &raquo; <a href="' + url + '">' + title + '</a></li>';
       lst.append(pst)
     }
     TAG_MODAL.modal('show');
