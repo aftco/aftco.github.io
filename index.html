@@ -22,60 +22,65 @@ title: Two Hand News
             <!-- linked-list linking: -->
             <!-- post.link: {{post.link}} -->
             <div class="row" style="padding-left: 15px;">
-            {% if post.link %}
-            <div class="col-md-9"><h4><a href="{{ post.link }}">{{ post.title }}</a></h4></div>
-            {% else %}
-            <div class="col-md-9"><h4>{{ post.title }}</h4></div>
-            {% endif %}
+              {% if post.link %}
+              <div class="col-md-9"><h4><a href="{{ post.link }}">{{ post.title }}</a></h4></div>
+              {% else %}
+              <div class="col-md-9"><h4>{{ post.title }}</h4></div>
+              {% endif %}
 
-            <div class="col-md-3"><p class="meta">{{ post.date | date_to_string }}</p></div>
-            </div>
-            <div>
- 
-              <div class="post">
-              {{ post.content }}
+              <div class="col-md-3"><p class="meta">{{ post.date | date_to_string }}</p></div>
+              <div>
+                <div class="post">
+                {{ post.content }}
+                </div>
               </div>
 
+              <!-- per-post permalink: -->
+              <div class="col-md-6"><p><a href="{{ post.url }}" title="Permalink">→2HN</a></p></div>
+              <div class="col-md-6">
+                <p class="tags">
+                Tags:
+                {% for tag in post.tags %}
+                <a href="tags.html">{{ tag }}</a>&nbsp;
+                {% endfor %}
+                </p>
+              </div>
             </div>
-
-            <!-- per-post permalink: -->
-            <div class="col-md-99"><a href="{{ post.url }}" title="Permalink">→2HN</a></div>
-
           </div>
         </div>
       </div>
     {% endfor %}
-    <div class="row">
-      <div class="col-md-12">
-        <div id="footer" class="well post-well">
+      <div class="row">
+        <div class="col-md-12">
+          <div id="footer" class="well post-well">
 
-          {% if paginator.total_pages > 1 %}
-            <div class="pagination">
-              {% if paginator.previous_page %}
-                <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
-              {% else %}
-                <span>&laquo; Prev</span>
-              {% endif %}
-
-              {% for page in (1..paginator.total_pages) %}
-                {% if page == paginator.page %}
-                  <em>{{ page }}</em>
-                {% elsif page == 1 %}
-                  <a href="{{ '/index.html' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
+            {% if paginator.total_pages > 1 %}
+              <div class="pagination">
+                {% if paginator.previous_page %}
+                  <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
                 {% else %}
-                  <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+                  <span>&laquo; Prev</span>
                 {% endif %}
-              {% endfor %}
 
-              {% if paginator.next_page %}
-                <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
-              {% else %}
-                <span>Next &raquo;</span>
-              {% endif %}
-            </div>
-          {% endif %}
+                {% for page in (1..paginator.total_pages) %}
+                  {% if page == paginator.page %}
+                    <em>{{ page }}</em>
+                  {% elsif page == 1 %}
+                    <a href="{{ '/index.html' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
+                  {% else %}
+                    <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+                  {% endif %}
+                {% endfor %}
+
+                {% if paginator.next_page %}
+                  <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
+                {% else %}
+                  <span>Next &raquo;</span>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
         </div>
       </div>
-    </div>
   </div>
 </div>
