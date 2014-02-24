@@ -1,6 +1,26 @@
+var TAG_MODAL = $('\
+<div id="tag-post-list-modal" class="modal fade">\
+  <div class="modal-dialog">\
+    <div class="modal-content">\
+      <div class="modal-header">\
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\
+        <h4 class="modal-title">&nbsp;</h4>\
+      </div>\
+      <div class="modal-body">\
+        <p><a href="/tags.html">All Tags</a></p>\
+        <ul class="modal-tag-list">\
+        </ul>\
+      </div>\
+    </div>\
+  </div>\
+</div>\
+');
+
 var TagManager = function(){
   this.JSON_TAGS_URL = "/tags_json/";
   this._tags = null;
+
+  $('body').append(TAG_MODAL);
 
   var self = this;
   $.ajax({
@@ -28,6 +48,22 @@ TagManager.prototype = {
     }
     return this._tags[lt];
   },
-  _doIndex: function() { },
-  activateExpiration: function(id) { }
+
+  showTagPosts: function(tag) {
+    var posts = this.getTagPosts(tag);
+    $('.modal-title', TAG_MODAL).html('Posts with tag "' + tag + '"');
+    var lst = $('.modal-body ul', TAG_MODAL);
+    lst.html("");
+    for (var i=0; i<posts.length; i++) {
+      var url = posts[i][0];
+      var title = posts[i][1];
+      var date = posts[i][2];
+      var displayDate = moment(posts[i][2]).format("DD MMM YYYY");
+
+      var pst = '<li itemscope><span class="entry-date"><time datetime="' + date + '" itemprop="datePublished">' +
+        displayDate + '</time></span> &raquo; <a href="' + url + '">' + title + '</a></li>';
+      lst.append(pst)
+    }
+    TAG_MODAL.modal('show');
+  }
 };
