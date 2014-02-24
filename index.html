@@ -34,15 +34,19 @@ title: Two Hand News
               </div>
 
               <!-- per-post permalink: -->
-              <div class="col-md-6"><p><a href="{{ post.url }}" title="Permalink">→2HN</a></p></div>
-              <div class="col-md-6">
-                <p class="tags">
-                Tags:
-                {% for tag in post.tags %}
-                <a href="tags.html">{{ tag }}</a>&nbsp;
-                {% endfor %}
-                </p>
+              <div class="col-md-9">
+                {% if post.tags.size > 0 %}
+                  <p class="tags">
+                    Tags:
+                    {% for tag in post.tags %}
+                      <a href="tags.html">{{ tag }}</a>&nbsp;
+                    {% endfor %}
+                  </p>
+                {% else %}
+                  &nbsp;
+                {% endif %}
               </div>
+              <div class="col-md-3"><p><a href="{{ post.url }}" title="Permalink">→2HN</a></p></div>
             </div>
           </div>
         </div>

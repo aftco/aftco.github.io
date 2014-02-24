@@ -25,16 +25,19 @@ layout: default
               {{ content }}
             </div>
 
-            <div class="col-md-6"><p>&nbsp;</p></div>
-            <div class="col-md-6">
-              <p class="tags">
+          <div class="col-md-9">
+            {% if page.tags.size > 0 %}
+            <p class="tags">
               Tags:
               {% for tag in page.tags %}
-              <a href="tags.html">{{ tag }}</a>&nbsp;
+                <a href="tags.html">{{ tag }}</a>&nbsp;
               {% endfor %}
-              </p>
-            </div>
+            </p>
+            {% else %}
+              &nbsp;
+            {% endif %}
           </div>
+          <div class="col-md-3"><p>&nbsp;</p></div>
         </div>
       </div>
   </div>
