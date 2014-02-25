@@ -13,28 +13,53 @@
         <script src="./moment.min.js"></script>
         <script>
             function reset_form(){
+                $('.alert-danger').addClass('hidden');
                 $('tr input, tr textarea').val('');
-                $('#filename').val(moment().format('YYYY-MM-DD-HH-mm') + '-my-title.md');
                 $('#layout').val('post');
+                $('#title').focus();
             };
 
             $(document).ready(function(){
                 reset_form();
                 $('#create-post').click( function(){
                     $('#create-post').addClass('disabled');
+
+                    the_data = {};
+                    the_data['filename'] = $('#filename').val();
+                    the_data['layout'] = $('#layout').val();
+                    the_data['title'] = $('#title').val();
+                    the_data['tags'] = $('#tags').val();
+                    the_data['link'] = $('#link').val();
+                    the_data['body'] = $('#body').val().replace(/\n/g, '\\n');
+
                     $.ajax({
-                        url: 'http://michaeltrumbell.com/tools/2hn/scripts/create_post.py?filename=' + $('#filename').val() + '&layout=' + $('#layout').val()  + '&title=' + $('#title').val()  + '&tags=' + $('#tags').val()  + '&link=' + $('#link').val()  + '&body=' + $('#body').val(),
-                        type: 'GET',
+                        url: 'http://michaeltrumbell.com/tools/2hn/scripts/create_post.py',
+                        //url: 'http://michaeltrumbell.com/tools/2hn/scripts/create_post.py?filename=' + $('#filename').val() + '&layout=' + $('#layout').val()  + '&title=' + $('#title').val()  + '&tags=' + $('#tags').val()  + '&link=' + $('#link').val()  + '&body=' + $('#body').val().replace(/\n/g, '\\n'),
+                        type: 'POST',
+                        data: the_data,
                         datatype: 'json',
                         timeout: 500000,
                         success: function(data) {
-                            reset_form();
-                            $('.alert-success').removeClass('hidden');
+                            if (data.is_valid){
+                                reset_form();
+                                $('.alert-success').removeClass('hidden');
+                            }
+                            else{
+                                $('.alert-success').addClass('hidden');
+                                $('.alert-danger').removeClass('hidden');
+                                $('.alert-danger').text(data.message);
+                            }
+                            console.log(data)
                         },
                         complete: function(){
                             $('#create-post').removeClass('disabled');
                         } 
                     });
+                });
+                
+                // live updating of title field
+                $('#title').on('keyup', function(){
+                    $('#filename').val(moment().format('YYYY-MM-DD-HH-mm-') + $(this).val().slice(0, 50).replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').replace(/ /g, '-').toLowerCase());
                 });
             });
         </script>
@@ -49,7 +74,12 @@
                     <table class="table">
                         <tr>
                             <td width=120>Filename:</td>
-                            <td><input type="text" class="form-control" id="filename" value="YYYYMMDD-HHMM-my-title.md"></td>
+                            <td>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="filename" value="YYYYMMDD-HHMM-my-title">
+                                    <span class="input-group-addon">.md</span>
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td>Layout:</td>
@@ -75,7 +105,7 @@
                 </div>
                 <div class="panel-footer">
                     <button id="create-post" class="btn btn-primary">Create Post</button>
-                    <div class="hidden pull-left alert alert-danger"></div>
+                    <div class="hidden pull-right alert alert-danger" style="padding: 6px 12px;"></div>
                     <div class="hidden pull-right alert alert-success" style="padding: 6px 12px;">Post created!</div>
                 </div>
             </div>

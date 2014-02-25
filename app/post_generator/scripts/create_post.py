@@ -11,37 +11,77 @@ import json
 #
 _posts_dir = '/home/mjtrumbe/aftco.github.io/_posts'
 
-def main():
+
+#
+#    write content header and return json
+#
+def return_response(response):
+    print "Content-type: application/json"
+    print 
+    print(json.JSONEncoder().encode(response))
+
+
+#
+#    validate form and return results
+#
+def validate_form():
+    form = { 'is_valid': True, 'message': '', 'fields': {} }
 
     #
     #    parse cgi get request
     #
     link = cgi.FieldStorage()
 
+    for i in ['filename', 'layout', 'title', 'tags', 'link', 'body']:
+        item = link.getvalue(i)
+        if item == None or item == '':
+            form['is_valid'] = False
+            form['message'] = '%s required' % i
+            return form
+        else:
+            form['fields'][i] = item
+
+    #
+    #    add .md file ending to filename
+    #
+    filename = link.getvalue('filename')
+    if filename[-3:] != '.md':
+        filename = filename + '.md'  
+    form['fields']['filename'] = filename
+
+    return form
+
+
+def main(form):
+
     #
     #    write lines to file
     #
-    with open(os.path.join(_posts_dir, link.getvalue('filename')), 'a') as new_post:
+    with open(os.path.join(_posts_dir, form['fields']['filename']), 'a') as new_post:
         new_post.write('---\n')
-        new_post.write('layout: %s\n' % link.getvalue('layout'))
-        new_post.write('title: %s\n' % link.getvalue('title'))
-        new_post.write('tags: %s\n' % link.getvalue('tags'))
-        new_post.write('link: %s\n' % link.getvalue('link'))
+        new_post.write('layout: %s\n' % form['fields']['layout'])
+        new_post.write('title: %s\n' % form['fields']['title'])
+        new_post.write('tags: %s\n' % form['fields']['tags'])
+        new_post.write('link: %s\n' % form['fields']['link'])
         new_post.write('---\n\n')
-        new_post.write(link.getvalue('body'))
+          
+        for line in form['fields']['body'].split('\\n'):
+            new_post.write('%s\n' % line)
 
     #
     #    git pull, add, commit and push new post
     #
-    os.system('cd %s && git pull && git add -A && git commit -m "Creating new post %s via webform" && git push' % (_posts_dir, link.getvalue('filename')))
+    os.system('cd %s && git pull && git add -A && git commit -m "Creating new post %s via webform" && git push' % (_posts_dir, form['fields']['filename']))
 
-    #
-    #    write content header and return json
-    #
-    print "Content-type: application/json"
-    print 
-    response={ 'success':True, 'message':"New post '%s' has been created and checked in!" % link.getvalue('filename') }
-    print(json.JSONEncoder().encode(response))
+    return_response({ 'is_valid':True, 'message':'Post created!' })
+
 
 if __name__ == "__main__":
-    main()
+    form = validate_form()
+    if form['is_valid']:
+        main(form)
+    else:
+        return_response(form)     
+
+
+
