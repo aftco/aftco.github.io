@@ -1,5 +1,5 @@
 body { 
-  padding-top: 0px; 
+  padding-top: 0;
 }
 
 .navbar{
@@ -18,15 +18,55 @@ body {
   }
 }
 
-.post-well div{
-  padding-left: 0;
+.post-well {
+  padding-bottom: 5px;
+}
+
+.post-well .row {
+  padding: 0;
 }
 
 .post-well h4{
   margin-top: 0;
 }
 
+.tags {
+  font-size: 10pt;
+  font-style: italic;
+}
+
 blockquote {
   font-size: inherit;
   font-style: italic;
 }
+
+.meta {
+  padding-left: 10px;
+  font-size: 10pt;
+  font-style: italic;
+}
+
+.tag-spacer {
+  clear: both;
+}
+
+.tag-container {
+  float: left;
+  padding: 3px;
+}
+
+.tag-container span {
+  vertical-align: super;
+  font-size: 10pt;
+  font-size: 1.1rem;
+}
+
+.tags {
+  padding-left: 10px
+}
+
+.modal-tag-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
