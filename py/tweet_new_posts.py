@@ -117,10 +117,6 @@ class Post(object):
                     tweet += tag_text
                     used_chars += len(tag_text)
 
-        # final sanity check
-        if len(tweet) > allowed_chars:
-            return tweet[:allowed_chars]
-
         return tweet
 
     @staticmethod
