@@ -6,7 +6,3 @@ link: https://www.profootballfocus.com/blog/2014/02/28/jvm-guards-and-centers/?u
 ---
 
 The praise keeps coming for Lions guard, Larry Warford.  PFF broke down values based on the [Jahnke Value Model](https://www.profootballfocus.com/blog/2014/02/24/jahnke-value-model-primer/) and Warford had the second best differential in the entire NFL.  Good news for the Lions salary cap and bad news for the rest of the NFC North.
-
-> 2013 Cap Hit: $579k
-2013 Jahnke Value Model: $6.6m
-Value Differential: +$6m
