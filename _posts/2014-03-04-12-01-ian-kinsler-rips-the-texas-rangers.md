@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Ian Kinsler Rips the Texas Rangers
-tags: TIgers
+tags: Tigers
 link: http://www.thedetroitsportssite.com/2014/03/04/ian-kinsler-rips-the-texas-rangers-i-hope-they-go-0-162/42069
 ---
 
