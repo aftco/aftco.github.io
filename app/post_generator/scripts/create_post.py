@@ -60,7 +60,7 @@ def main(form):
     with open(os.path.join(_posts_dir, form['fields']['filename']), 'a') as new_post:
         new_post.write('---\n')
         new_post.write('layout: %s\n' % form['fields']['layout'])
-        new_post.write('title: %s\n' % form['fields']['title'])
+        new_post.write('title: "%s"\n' % form['fields']['title'])
         new_post.write('tags: %s\n' % form['fields']['tags'])
         new_post.write('link: %s\n' % form['fields']['link'])
         new_post.write('---\n\n')
