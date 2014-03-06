@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The Lions \(likely\) Draft Choice: a WR or CB in Round 1
+title: "The Lions (likely) Draft Choice: a WR or CB in Round 1"
 tags: Lions
 link: http://insider.espn.go.com/nfl/draft/mock/?season=2014&source=todd-mcshay-mock-draft&version=3
 ---
