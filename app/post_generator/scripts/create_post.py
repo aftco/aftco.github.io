@@ -4,6 +4,7 @@
 import os
 import cgi
 import json
+import commands
 
 #
 #    path to local git repo _posts dir
@@ -71,9 +72,11 @@ def main(form):
     #
     #    git pull, add, commit and push new post
     #
-    os.system('cd %s && git pull && git add -A && git commit -m "Creating new post %s via webform" && git push' % (_posts_dir, form['fields']['filename']))
+    commands.getoutput('cd %s && git pull && git add -A && git commit -m "Creating new post %s via webform" && git push' % (_posts_dir, form['fields']['filename']))
 
-    return_response({ 'is_valid':True, 'message':'Post created!' })
+    form['message'] = 'Post created!'
+
+    return_response(form)
 
 
 if __name__ == "__main__":
