@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Lions have "heavy interest" in James Jones"
+title: Lions have "heavy interest" in James Jones
 tags: Lions
 link: http://nfltraderumors.co/report-james-jones-drawing-heavy-interest-from-lions-jets-packers-still-an-option/
 ---
