@@ -61,12 +61,41 @@ blockquote {
   font-size: 1.1rem;
 }
 
-.tags {
-  padding-left: 10px
-}
-
 .modal-tag-list {
   list-style-type: none;
   padding-left: 0;
 }
 
+.meta {
+  padding-left: 30px;
+  padding-bottom: 5px;
+  font-style: italic;
+  font-size: 10pt;
+  font-weight: normal;
+}
+
+.meta .date {
+  display: inline-block !important;
+}
+
+.tags {
+  display: inline-block !important;
+  float: right;
+  width: auto;
+}
+
+.permalink {
+  padding-left: 30px;
+}
+
+
+@media (max-width:767px) {
+  .meta .date {
+    display: block;
+  }
+
+  .tags {
+    display: block !important;
+    float: none !important;
+  }
+}
