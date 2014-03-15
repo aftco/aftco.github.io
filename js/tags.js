@@ -39,6 +39,7 @@ var TagManager = function(){
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {
+      var a = 67;
     }
   });
 };

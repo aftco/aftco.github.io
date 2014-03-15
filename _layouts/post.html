@@ -28,7 +28,6 @@ layout: default
           <div class="col-md-9">
             {% if page.tags.size > 0 %}
             <p class="tags">
-              Tags:
               {% for tag in page.tags %}
                 <a href="/tags.html#{{ tag }}">{{ tag }}</a>&nbsp;
               {% endfor %}

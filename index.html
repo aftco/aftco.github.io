@@ -38,7 +38,6 @@ title: Two Hand News
               <div class="col-md-9">
                 {% if post.tags.size > 0 %}
                   <p class="tags">
-                    Tags:
                     {% for tag in post.tags %}
                       <a href="/tags.html#{{ tag }}">{{ tag }}</a>&nbsp;
                     {% endfor %}
