@@ -13,6 +13,6 @@ Way too close, but excellent clutch decision by Stauskas under pressure:
 
 Wow..
 
-Next up in the Big Ten Tournament? [Ohio State](http://espn.go.com/ncb/preview?gameId=400546600).
+Next up for Michigan in the Big Ten Tournament? [Ohio State](http://espn.go.com/ncb/preview?gameId=400546600) today [on CBS](http://www.cbssports.com).
 
 [\[Box Score\]](http://scores.espn.go.com/ncb/boxscore?gameId=400546235)
