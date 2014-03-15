@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Michigan Moves On To Big Ten Final
-tags: UofM
+tags: UofM Basketball
 link: http://scores.espn.go.com/ncb/boxscore?gameId=400546600
 ---
 
