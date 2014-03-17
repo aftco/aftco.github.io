@@ -5,7 +5,7 @@ tags: Lions
 link: https://www.profootballfocus.com/blog/2014/03/17/lions-re-sign-pettigrew/?utm_source=feedly&utm_reader=feedly&utm_medium=rss&utm_campaign=lions-re-sign-pettigrew
 ---
 
-The RSS teaser for this story orginally read:
+The RSS teaser for this story originally read:
 
 >The big, slow, free agent tight end has agreed to stay with his current Detroit Lions. Will a new contract and coaching staff change his fantasy football value?
 
