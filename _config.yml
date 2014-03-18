@@ -6,3 +6,4 @@ pygments: true
 exclude: ["vendor"]
 paginate: 10
 paginate_path: "/page:num"
+encoding: utf-8
