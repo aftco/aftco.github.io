@@ -64,15 +64,19 @@
         // Box Scores
 
         var $boxScores = new BoxScoresManager();
-        $boxScores.addTeam('Tigers');
-        $boxScores.addTeam('Lions');
-        $boxScores.addTeam('Red Wings');
-        $boxScores.addTeam('Michigan Football');
-        $boxScores.addTeam('Michigan Basketball');
 
         {% if page.boxscore_panels %}
         $boxScores.displayPanels("{{ page.boxscore_panels }}");
         {% endif %}
+
+        $boxScores.addTeam('Tigers');
+        $boxScores.addTeam('Lions');
+        $boxScores.addTeam('Pistons');
+        $boxScores.addTeam('Red Wings');
+        $boxScores.addTeam('Michigan Football');
+        $boxScores.addTeam('Michigan Basketball');
+        $boxScores.addTeam('MSU Football');
+        $boxScores.addTeam('MSU Basketball');
 
 
         //****************************************
