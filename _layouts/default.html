@@ -23,9 +23,11 @@
               <div class="pull-left">
           	<a href="/"><img src="/img/2hand-logo2.png" /></a>
               </div>
-              <div class="social pull-right">
-	          <a href="https://twitter.com/twohandnews"><i class="fa fa-twitter fa-2x"></i></a>
-	      </div>
+            <div class="social pull-right">
+              <a href="/box_scores.html"><i class="fa fa-pencil-square-o fa-2x"></i></a>
+              &nbsp;
+              <a href="https://twitter.com/twohandnews"><i class="fa fa-twitter fa-2x"></i></a>
+            </div>
           </div>
         </div>
       </div>
@@ -44,15 +46,37 @@
       <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
       <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment-with-langs.min.js"></script>
       <script src="/js/tags.js"></script>
+      <script src="/js/box_scores.js"></script>
 
       <script type="text/javascript">
 
-        var $tags = new TagManager();
+        //****************************************
+        // Tags
 
+        var $tags = new TagManager();
         $(".tags a").click(function () {
           $tags.showTagPosts($(this).html());
           return false;
         });
+
+
+        //****************************************
+        // Box Scores
+
+        var $boxScores = new BoxScoresManager();
+        $boxScores.addTeam('Tigers');
+        $boxScores.addTeam('Lions');
+        $boxScores.addTeam('Red Wings');
+        $boxScores.addTeam('Michigan Football');
+        $boxScores.addTeam('Michigan Basketball');
+
+        {% if page.boxscore_panels %}
+        $boxScores.displayPanels("{{ page.boxscore_panels }}");
+        {% endif %}
+
+
+        //****************************************
+        // Google Analytics
 
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-48248763-1']);
