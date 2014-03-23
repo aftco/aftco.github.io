@@ -1,2 +1,29 @@
 [
+  { "opponent": "Chicago Bears", "date": 20140205, "home": true, "final": [14, 10],
+    "scores": [ [1, 7, 0], [2, 7, 3], [3, 14, 10], [4, 14, 13] ]
+  },
+
+  { "opponent": "Chicago Bears", "date": 20140205, "home": true, "final": [14, 10],
+    "scores": [ [1, 7, 0], [2, 7, 3], [3, 14, 10], [4, 14, 13] ]
+  },
+
+  { "opponent": "Chicago Bears", "date": 20140205, "home": true, "final": [14, 10],
+    "scores": [ [1, 7, 0], [2, 7, 3], [3, 14, 10], [4, 14, 13] ]
+  },
+
+  { "opponent": "Chicago Bears", "date": 20140205, "home": true, "final": [14, 10],
+    "scores": [ [1, 7, 0], [2, 7, 3], [3, 14, 10], [4, 14, 13] ]
+  },
+
+  { "opponent": "Chicago Bears", "date": 20140205, "home": true, "final": [14, 10],
+    "scores": [ [1, 7, 0], [2, 7, 3], [3, 14, 10], [4, 14, 13] ]
+  },
+
+  { "opponent": "Chicago Bears", "date": 20140205, "home": true, "final": [14, 10],
+    "scores": [ [1, 7, 0], [2, 7, 3], [3, 14, 10], [4, 14, 13] ]
+  },
+
+  { "opponent": "Chicago Bears", "date": 20140205, "home": true, "final": [14, 10],
+    "scores": [ [1, 7, 0], [2, 7, 3], [3, 14, 10], [4, 14, 13] ]
+  }
 ]

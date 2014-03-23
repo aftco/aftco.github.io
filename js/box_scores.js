@@ -2,11 +2,26 @@ var BOX_SCORES_PANEL = $('\
 <div class="col-md-6">\
   <div class="box-scores-panel panel panel-default">\
     <div class="panel-heading"><h4 class="title">&nbsp;</h4></div>\
-    <table class="table"><tbody></tbody></table>\
+    <table class="table table-condensed"><tbody></tbody></table>\
     <div class="panel-footer">&nbsp;<div class="pull-right"><a href="#">More...</a></div></div>\
   </div>\
 </div>\
 ');
+
+var BoxScoreFormatter = function() {
+};
+
+BoxScoreFormatter.prototype = {
+  shortFormat: function(teamData, boxScore) {
+    var homeText = teamData.teamShort + " " + boxScore.final[0].toString();
+    var opponentText = boxScore.opponent + " " + boxScore.final[1].toString();
+    if (boxScore.home) {
+      return opponentText + " @ " + homeText;
+    }
+
+    return homeText + " @ " + opponentText;
+  }
+};
 
 var BoxScoresManager = function(options){
   this._options = {};
@@ -15,6 +30,7 @@ var BoxScoresManager = function(options){
   if (this._options.numTeamPanel === undefined) this._options.numTeamPanel = 5;
 
   this._jsonUrl = "/box_scores/";
+  this._formatter = new BoxScoreFormatter();
   this._teams = {};
   this._displayPanels = null;
 };
@@ -28,11 +44,11 @@ BoxScoresManager.prototype = {
     return toReturn;
   },
 
-  addTeam: function(team) {
-    var teamCode = this._teamToCode(team);
+  addTeam: function(team, teamCode, teamShort) {
     var teamPanel = this._addTeamPanel(team, teamCode);
     var teamData = {
-      team: team,
+      teamName: team,
+      teamShort: teamShort,
       teamCode: teamCode,
       teamPanel: teamPanel,
       data: null
@@ -57,9 +73,10 @@ BoxScoresManager.prototype = {
   },
 
   _addTeamPanel: function(team, teamCode) {
-    if (this._displayPanels === null) return;
+    if (this._displayPanels === null) return null;
 
     var teamPanel = BOX_SCORES_PANEL.clone();
+    teamPanel.attr('id', teamCode + "-panel");
     this._displayPanels.append(teamPanel);
 
     $('.title', teamPanel).html(team);
@@ -69,10 +86,10 @@ BoxScoresManager.prototype = {
   _doDisplayPanel: function(teamData) {
     var tbody = $('tbody', teamData.teamPanel);
 
-    tbody.append('<tr><td>date</td><td>team</td><td>other team</td><td>score</td></tr>');
-    tbody.append('<tr><td>date</td><td>team</td><td>other team</td><td>score</td></tr>');
-    tbody.append('<tr><td>date</td><td>team</td><td>other team</td><td>score</td></tr>');
-    tbody.append('<tr><td>date</td><td>team</td><td>other team</td><td>score</td></tr>');
-    tbody.append('<tr><td>date</td><td>team</td><td>other team</td><td>score</td></tr>');
+    for (var i=0; i<this._options.numTeamPanel; i++) {
+      if (teamData.data === null || i >= teamData.data.length) break;
+      var score = this._formatter.shortFormat(teamData, teamData.data[i]);
+      tbody.append('<tr><td>' + score + '</td></tr>');
+    }
   }
 };
