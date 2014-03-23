@@ -2,6 +2,9 @@ from datetime import datetime, timedelta
 import urllib2
 import json
 
+#
+#    configured teams to generate boxscores for
+#
 TEAMS = {
             #'lions': {'name': 'Lions', 'url': 'http://espn.go.com/nfl/team/_/name/det/detroit-lions'},
             'tigers': {'name': 'Tigers', 'url': 'http://espn.go.com/mlb/team/_/name/det/detroit-tigers'},
@@ -13,7 +16,9 @@ TEAMS = {
             #'msu_football': {'name': 'MSU Football', 'url': 'http://espn.go.com/college-football/team/_/id/127/michigan-state-spartans'},
 }
 
-
+#
+#    return BeautifulSoup html parser object
+#
 def get_html(url):
     from BeautifulSoup import BeautifulSoup
 
@@ -21,21 +26,18 @@ def get_html(url):
     return BeautifulSoup(html)
 
 
-def parse_html(soup):
-    box_score_div = soup.find("div", { "class" : "line-score clear" })
-    box_score_table = box_score_div.find("table", {"class" : "linescore"})   
-
-    
 def main():
     
     all_scores = []
     for team in TEAMS:
         html = get_html(TEAMS[team]['url'])
+
+        yesterday = datetime.now() - timedelta(days=1)
+        last_game_recap = html.find("div", {"class": "mod-container mod-no-footer mod-game current"})
+
         #
         #   determine if game happened yesterday
         #
-        yesterday = datetime.now() - timedelta(days=1)
-        last_game_recap = html.find("div", {"class": "mod-container mod-no-footer mod-game current"})
         if last_game_recap(text=datetime.strftime(yesterday, '%b %d')) != 0:
             details = {'team': team, 'date': datetime.strftime(yesterday, '%Y%m%d'), }
             venue = last_game_recap.find("div", {"class": "venue"})
@@ -51,7 +53,6 @@ def main():
                 details['time'] = ''
 
             scoring = last_game_recap.find("div", {"class": "scoring"})
-
             loser = scoring.find('table').findAll('tr')[1]
             winner = scoring.find('table').findAll('tr')[2]
 
@@ -77,6 +78,9 @@ def main():
                     count += 1
             details['scores'] = scores
             
+            #
+            #   parse scores
+            #
             away_team = last_game_recap.find("div", {"class": "team team-away"})
             home_team = last_game_recap.find("div", {"class": "team team-home"})
             if TEAMS[team]['url'] == home_team("a")[0].attrs[0][1]:
@@ -85,13 +89,16 @@ def main():
             else:
                 details['home'] = False
                 details['opponent'] = home_team("h6")[0].text
-            
             for link in last_game_recap.find("p", {"class": "links"}).findAll('a'):
                  if 'Box' in str(link):
                      details['link'] = 'http://espn.go.com%s' % link.attrs[0][1]
+                     
             details['game_text'] = '%s @ %s' % (away_team("h6")[0].text, home_team("h6")[0].text)
             all_scores.append(details)
-    
+
+    #
+    #   print all_scores as clean json
+    #
     print json.dumps(all_scores)
     
 
