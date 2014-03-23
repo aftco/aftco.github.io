@@ -27,8 +27,6 @@ def get_html(url):
 
 
 def main():
-    
-    all_scores = []
     for team in TEAMS:
         html = get_html(TEAMS[team]['url'])
 
@@ -94,12 +92,11 @@ def main():
                      details['link'] = 'http://espn.go.com%s' % link.attrs[0][1]
                      
             details['game_text'] = '%s @ %s' % (away_team("h6")[0].text, home_team("h6")[0].text)
-            all_scores.append(details)
 
-    #
-    #   print all_scores as clean json
-    #
-    print json.dumps(all_scores)
+        #
+        #   print details as clean json
+        #
+        print json.dumps(details)
     
 
 if __name__ == "__main__":
