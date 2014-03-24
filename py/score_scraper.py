@@ -36,7 +36,7 @@ def main():
         #
         #   determine if game happened yesterday
         #
-        if last_game_recap(text=datetime.strftime(yesterday, '%b %d')) != 0:
+        if last_game_recap and last_game_recap(text=datetime.strftime(yesterday, '%b %d')) != 0:
             details = {'team': team, 'date': datetime.strftime(yesterday, '%Y%m%d'), }
             venue = last_game_recap.find("div", {"class": "venue"})
             if venue:
@@ -93,10 +93,10 @@ def main():
                      
             details['game_text'] = '%s @ %s' % (away_team("h6")[0].text, home_team("h6")[0].text)
 
-        #
-        #   print details as clean json
-        #
-        print json.dumps(details)
+            #
+            #   print details as clean json
+            #
+            print json.dumps(details)
     
 
 if __name__ == "__main__":
