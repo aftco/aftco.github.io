@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Tigers win opener is walk off fashion"
+title: "Tigers win opener in walk off fashion"
 tags: Tigers
 link: http://www.mlive.com/tigers/index.ssf/2014/03/tigers_xx_royals_xx_justin_ver.html
 ---
