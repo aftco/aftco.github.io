@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Spartans, Wolverines advance to Elite 8"
-tags: MSU, UofM, Basketball
+tags: MSU UofM Basketball
 link: http://www.cbssports.com/collegebasketball/eye-on-college-basketball/24505115/night-court-kentucky-michigan-msu-and-uconn-prevail
 ---
 
