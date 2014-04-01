@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Tigers hire private sabremetric stats analyst"
+title: "Tigers hire private sabremetrician"
 tags: Tigers
 link: http://motorcitybengals.com/2014/04/01/detroit-tigers-hire-private-statistical-analyst/
 ---
