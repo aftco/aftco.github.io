@@ -5,4 +5,4 @@ tags: Tigers
 link: http://mlb.mlb.com/mlb/standings/
 ---
 
-Thanks to a series shortened sweep of the Royals, the Tigers have opened up the 2014 campaign with a .5 game lead over Cleveland and Chicago.
+Thanks to a rain shortened series sweep of the Royals, the Tigers have opened up the 2014 campaign with a .5 game lead over Cleveland and Chicago.
