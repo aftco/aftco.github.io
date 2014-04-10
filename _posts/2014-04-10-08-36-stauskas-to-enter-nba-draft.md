@@ -9,4 +9,7 @@ Still waiting for more details, but ESPN is reporting that Nik Stauskas is going
 
 UPDATED: Added link to ESPN's story.
 
-And now, [Stauskas is saying no decision has been made yet](http://www.mlive.com/wolverines/index.ssf/2014/04/nik_stauskas_rebuts_reports_of.html).
+And now, [Stauskas is saying no decision has been made yet](http://www.mlive.com/wolverines/index.ssf/2014/04/nik_stauskas_rebuts_reports_of.html). Stauskas on Twitter:
+
+> Just wanted to reiterate that any reports about my future intenions are FALSE! I have NOT made ANY decisions on my future yet!
+
