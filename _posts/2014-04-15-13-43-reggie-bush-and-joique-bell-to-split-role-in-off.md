@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Reggie Bush and Joique Bell to "split role" in offense"
+title: "Reggie Bush and Joique Bell to split role in offense"
 tags: Lions
 link: http://www.nfl.com/news/story/0ap2000000341502/article/detroit-lions-oc-reggie-bush-joique-bell-to-split-role
 ---
