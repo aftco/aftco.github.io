@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Grantland&#058; Detroit Week
+title: "Grantland&#058; Detroit Week"
 tags: Detroit
 link: http://grantland.com/detroitweek/
 ---
