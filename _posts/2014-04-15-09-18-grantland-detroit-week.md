@@ -17,5 +17,6 @@ Grantland is running a week-long feature highlighting the Motor City.  Make sure
 * 2014-04-16 - [Losing Yourself All Over Again](http://grantland.com/features/oral-history-8-mile-rap-battles-eminem/)
 * 2014-04-16 - [The Seger Seven](http://grantland.com/features/bob-seger-detroit-week-career/)
 * 2014-04-17 - [Bad Boys and Good Times](http://grantland.com/features/bad-boy-detroit-pistons-30-for-30-documentary/)
+* 2014-04-17 - [The Sad Boys](http://grantland.com/the-triangle/the-sad-boys-looking-back-at-brandon-jennings-and-josh-smiths-brick-laden-season-in-detroit/)
 
 Also, don't forget the [30 for 30: Bad Boys](http://espn.go.com/30for30/film?page=badboys) documentary airs April 17th at 8PM EST on ESPN.
