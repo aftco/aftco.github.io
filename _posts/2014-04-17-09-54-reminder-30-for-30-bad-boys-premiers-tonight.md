@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Reminder: 30 for 30 Bad Boys premiers tonight
+title: "Reminder: 30 for 30 Bad Boys premiers tonight"
 tags: Pistons BadBoys Basketball
 link: http://espn.go.com/30for30/film?page=badboys
 ---
