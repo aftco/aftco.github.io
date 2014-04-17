@@ -16,7 +16,7 @@ REGEX_FIND_PATTERN = """[ -"',:.?]+"""
 
 POST_BODY_FORMAT="""---
 layout: post
-title: {title}
+title: "{title}"
 tags: 
 link: {link}
 ---
