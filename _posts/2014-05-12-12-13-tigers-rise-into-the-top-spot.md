@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Tigers rise into the top spot"
+title: "MLB Power Rankings: Tigers rise into the top spot"
 tags: Tigers
 link: http://espn.go.com/mlb/powerrankings
 ---
