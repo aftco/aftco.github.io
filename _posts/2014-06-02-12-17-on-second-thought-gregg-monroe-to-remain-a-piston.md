@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "On second thought, Gregg Monroe to remain a Piston?"
+title: "On second thought, Greg Monroe to remain a Piston?"
 tags: Pistons
 link: http://www.mlive.com/pistons/index.ssf/2014/06/new_detroit_pistons_boss_stan.html
 ---
